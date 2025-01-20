@@ -40,7 +40,7 @@ VALIDATE $? "EABLEING NODEJS"
 dnf install nodejs -y &>> $LOGFILE
 VALIDATE $? "Installing Nodejs"  
 
-#useradd roboshp
+useradd roboshop
 VALIDATE $? "Creating Roboshop user" 
 
 #mkdir /app
