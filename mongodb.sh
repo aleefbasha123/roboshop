@@ -33,18 +33,18 @@ VALIDATE $? "Copied Mongodb Repo"
 
 dnf install mongodb-org -y  &&>> $LOGFILE
 
-VALIDARE $? "Installing MonoDB"
+VALIDATE $? "Installing MonoDB"
 
 systemctl enable mongod &&>> $LOGFILE
 
-VALIDARE $? "Enabeling MonoDB"
+VALIDATE $? "Enabeling MonoDB"
 
 systemctl start mongod &&>> $LOGFILE
 
-VALIDARE $? "Strating MonoDB"
+VALIDATE $? "Strating MonoDB"
 
 sed -i '/127.0.0.1/0.0.0.0/g' /etc/mongod.conf &&>> $LOGFILE
 
-VALIDARE $? "Remote access to Mongodb"
+VALIDATE $? "Remote access to Mongodb"
 
 systemctl restart mongod &&>> $LOGFILE
