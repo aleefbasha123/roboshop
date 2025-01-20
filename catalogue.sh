@@ -6,7 +6,7 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
  
- MONGDB_HOST=$mongodb.aleef.fun
+ MONGDB_HOST=mongodb.aleef.fun
 
 TIMESTAMP=$(date +%F-%H-%M-%S)
 LOGFILE="/tmp/$0-$TIMESTAMP.log"
@@ -29,41 +29,41 @@ else
     echo "you are in root user"
 fi #fi means reverse of if, including condtion end.
 
-dnf module disable nodejs -y
+dnf module disable nodejs -y &>> $LOGFILE
 
-VALIDATE $? "dISABLEING CURRENT NODEJS" &>> $LOGFILE
+VALIDATE $? "dISABLEING CURRENT NODEJS"
 
-dnf module enable nodejs -y
+dnf module enable nodejs -y &>> $LOGFILE
 
-VALIDATE $? "EABLEING NODEJS" &>> $LOGFILE
+VALIDATE $? "EABLEING NODEJS" 
 
-dnf install nodejs -y
-VALIDATE $? "Installing Nodejs"  &>> $LOGFILE
+dnf install nodejs -y &>> $LOGFILE
+VALIDATE $? "Installing Nodejs"  
 
 useradd roboshp
-VALIDATE $? "Creating Roboshop user"  &>> $LOGFILE
+VALIDATE $? "Creating Roboshop user" 
 
 mkdir /app
-VALIDATE $? "Creating App Directory"  &>> $LOGFILE
+VALIDATE $? "Creating App Directory" 
 
-curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip
-VALIDATE $? "Downloading catalogue application"  &>> $LOGFILE
+curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip &>> $LOGFILE
+VALIDATE $? "Downloading catalogue application" 
 
 cd /app
 
-unzip /tmp/catalogue.zip
-VALIDATE $? "Unzipping catalogue application"  &>> $LOGFILE
+unzip /tmp/catalogue.zip &>> $LOGFILE
+VALIDATE $? "Unzipping catalogue application"  
 
-npm install
-VALIDATE $? "Installing dependences"  &>> $LOGFILE
+npm install &>> $LOGFILE
+VALIDATE $? "Installing dependences" 
 
 #use absolute path beacuse catalogue exist there
 cp /home/centos/roboshop/catalogue.service /etc/systemd/system/catalogue.service
 VALIDATE $? "Copying catalogue service file"
 
-systemctl daemon-reload
+systemctl daemon-reload &>> $LOGFILE
 
-VALIDATE $? "catalogue daemon realod" &>> $LOGFILE
+VALIDATE $? "catalogue daemon realod" 
 
 systemctl enable catalogue &>> $LOGFILE
 
@@ -73,14 +73,14 @@ systemctl start catalogue &>> $LOGFILE
 
 VALIDATE $? "starting  catalogue"
 
-cp /home/centos/roboshop/mongo.repo /etc/yum.repos.d/mongo.repo
+cp /home/centos/roboshop/mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
 
 VALIDATE $? "copying mongo repo"
 
-dnf install mongodb-org-shell -y
-
+dnf install mongodb-org-shell -y &>> $LOGFILE
+ 
 VALIDATE $? "Installing mongodb-org-shell"
 
 
-mongo --host $MONGDB_HOST </appa/schema/catalogue.js
+mongo --host $MONGDB_HOST </appa/schema/catalogue.js &>> $LOGFILE
 VALIDATE $? "Loading catalogue data into mongodb"
