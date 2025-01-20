@@ -40,10 +40,10 @@ VALIDATE $? "EABLEING NODEJS"
 dnf install nodejs -y &>> $LOGFILE
 VALIDATE $? "Installing Nodejs"  
 
-useradd roboshp
+#useradd roboshp
 VALIDATE $? "Creating Roboshop user" 
 
-mkdir /app
+#mkdir /app
 VALIDATE $? "Creating App Directory" 
 
 curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip &>> $LOGFILE
