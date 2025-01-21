@@ -41,10 +41,17 @@ VALIDATE $? "EABLEING NODEJS"
 dnf install nodejs -y &>> $LOGFILE
 VALIDATE $? "Installing Nodejs"  
 
-useradd roboshop
+id roboshop
+if [ $? -ne 0 ]
+then 
+    useradd roboshop
 VALIDATE $? "Creating Roboshop user" 
+else
+   echo -e "roboshop user already existing $Y SKIPPING $N"
+fi
 
-mkdir /app
+
+mkdir -p /app
 VALIDATE $? "Creating App Directory" 
 
 curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip &>> $LOGFILE
