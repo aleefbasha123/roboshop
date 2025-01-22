@@ -6,7 +6,6 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
  
- MONGDB_HOST=mongodb.aleef.fun
 
 TIMESTAMP=$(date +%F-%H-%M-%S)
 LOGFILE="/tmp/$0-$TIMESTAMP.log"
@@ -30,7 +29,7 @@ else
     echo "you are in root user"
 fi #fi means reverse of if, including condtion end.
 
-dnf install ngnix &>> $LOGFILE
+dnf install nginx &>> $LOGFILE
 
 VALIDATE $? "INSTALLING NGINX"
 
