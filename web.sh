@@ -29,8 +29,8 @@ else
     echo "you are in root user"
 fi #fi means reverse of if, including condtion end.
 
-dnf install nginx &>> $LOGFILE
 
+dnf install nginx -y &>> $LOGFILE
 VALIDATE $? "INSTALLING NGINX"
 
 systemctl enable nginx &>> $LOGFILE
