@@ -29,29 +29,29 @@ else
     echo "you are in root user"
 fi #fi means reverse of if, including condtion end.
 
-dnf module disable mysql -y
+dnf module disable mysql -y &>> $LOGFILE
 
 VALIDATE $? "old version disabling mysql"
 
-cp /home/centos/roboshp/mysql.repo /etc/yum.repos.d/mysql.repo
+cp mysql.repo /etc/yum.repos.d/mysql.repo &>> $LOGFILE
 
 VALIDATE $? "coping  mysql-repo"
 
-dnf install mysql-community-server -y
+dnf install mysql-community-server -y &>> $LOGFILE
 VALIDATE $? "Installing mysql"
 
-systemctl enable mysqld
+systemctl enable mysqld &>> $LOGFILE
 
 VALIDATE $? "enable  mysql"
 
-systemctl start mysqld
+systemctl start mysqld &>> $LOGFILE
 
 VALIDATE $? "start  mysql"
 
-mysql_secure_installation --set-root-pass RoboShop@1
+mysql_secure_installation --set-root-pass RoboShop@1 &>> $LOGFILE
 
 VALIDATE $? "set root password"
-mysql -uroot -pRoboShop@1
+mysql -uroot -pRoboShop@1 &>> $LOGFILE
 VALIDATE $? "user root"
 
 
