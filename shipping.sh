@@ -60,7 +60,7 @@ mv target/shipping-1.0.jar shipping.jar &>> $LOGFILE
 
 VALIDATE $? "renaming packages"
 
-cp /home/centos/roboshp/shipping.service /etc/systemd/system/shipping.service &>> $LOGFILE
+cp /home/centos/roboshop/roboshop.service /etc/systemd/system/shipping.service &>> $LOGFILE
 VALIDATE $? "copying shipping services"
 
 systemctl daemon-reload &>> $LOGFILE
