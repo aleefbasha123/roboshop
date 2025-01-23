@@ -35,14 +35,14 @@ curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.
 
 curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | bash
 
-dnf install rabbitmq-server -y 
+dnf install rabbitmq-server -y &>> $LOGFILE
 VALIIDATE $? "Installing rabbitmq"
 
-systemctl enable rabbitmq-server 
+systemctl enable rabbitmq-server &>> $LOGFILE
 VALIDATE $? "Enableing rabbitmq"
 
-rabbitmqctl add_user roboshop roboshop123
+rabbitmqctl add_user roboshop roboshop123 &>> $LOGFILE
 VALIDATE $? "Adining roboshop user"
 
-rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
+rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*" &>> $LOGFILE
 VALIDATE $? "permissions"
