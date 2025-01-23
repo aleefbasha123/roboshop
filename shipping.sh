@@ -29,7 +29,7 @@ else
     echo "you are in root user"
 fi #fi means reverse of if, including condtion end
 
-dnf install maven -y
+dnf install maven -y &>> $LOGFILE
 VALIDATE $? "INSTALLING MAVEN"
 
 id roboshop
@@ -42,13 +42,13 @@ else
 fi
 
 
-mkdir -p /app
+mkdir -p /app &>> $LOGFILE
 VALIDATE $? "Creating App Directory" 
 
 curl -L -o /tmp/shipping.zip https://roboshop-builds.s3.amazonaws.com/shipping.zip &>> $LOGFILE
 VALIDATE $? "Downloading shipping application" 
 
-cd /app &>> $LOGFILE
+cd /app &>> $LOGFILE &>> $LOGFILE
 VALIDATE $? "entering app directory"
 
 
