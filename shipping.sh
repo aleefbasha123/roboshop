@@ -48,7 +48,7 @@ VALIDATE $? "Creating App Directory"
 curl -L -o /tmp/shipping.zip https://roboshop-builds.s3.amazonaws.com/shipping.zip &>> $LOGFILE
 VALIDATE $? "Downloading shipping application" 
 
-cd /app &>> &LOGFILE
+cd /app &>> $LOGFILE
 VALIDATE $? "entering app directory"
 
 
