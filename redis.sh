@@ -30,25 +30,25 @@ else
     echo "you are in root user"
 fi #fi means reverse of if, including condtion end.
 
-dnf install https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y 
+dnf install https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y &>> $LOGFILE
 VALIDATE $? "Dowloading Remi release"
 
-dnf module enable redis:remi-6.2 -y  
+dnf module enable redis:remi-6.2 -y  &>> $LOGFILE
 
 VALIDATE $? "Enabling redis"
 
-dnf install redis -y   
+dnf install redis -y   &>> $LOGFILE
 
 VALIDATE $? "Installing  redis"
 
-sed -i 's/127.0.0.1/0.0.0.0/g' /etc/redis/redis.conf  
+sed -i 's/127.0.0.1/0.0.0.0/g' /etc/redis/redis.conf  &>> $LOGFILE
 
 VALIDATE $? "Allowing Remote Access"
 
-systemctl enable redis 
+systemctl enable redis &>> $LOGFILE
 
 VALIDATE $? "Enabeling redis"
 
-systemctl start redis  
+systemctl start redis  &>> $LOGFILE
 
 VALIDATE $? "start redis"
