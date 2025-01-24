@@ -1,9 +1,0 @@
-[Unit]
-Description = User Service
-[Service]
-User=roboshop
-Environment=MONGO=true
-Environment=REDIS_HOST=redis.aleef.fun
-Environment=MONGO_URL="mongodb://mongodb.aleef.fun:27017/users"
-ExecStart=/bin/node /app/server.js
-SyslogIdentifier=user
